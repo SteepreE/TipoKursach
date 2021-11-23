@@ -33,13 +33,13 @@
             this.StartStopButton = new System.Windows.Forms.Button();
             this.SpeedBar = new System.Windows.Forms.TrackBar();
             this.NextStepButton = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.PbMain = new System.Windows.Forms.PictureBox();
             this.SpeedLabel = new System.Windows.Forms.Label();
             this.DirectionSelector = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.InfoLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.SpeedBar)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PbMain)).BeginInit();
             this.SuspendLayout();
             // 
             // timer1
@@ -77,14 +77,15 @@
             this.NextStepButton.UseVisualStyleBackColor = true;
             this.NextStepButton.Click += new System.EventHandler(this.NextStepButton_Click);
             // 
-            // pictureBox1
+            // PbMain
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(12, 59);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(776, 374);
-            this.pictureBox1.TabIndex = 4;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
+            this.PbMain.Location = new System.Drawing.Point(12, 59);
+            this.PbMain.Name = "PbMain";
+            this.PbMain.Size = new System.Drawing.Size(776, 374);
+            this.PbMain.TabIndex = 4;
+            this.PbMain.TabStop = false;
+            this.PbMain.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseClick);
+            this.PbMain.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
             // 
             // SpeedLabel
             // 
@@ -136,7 +137,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.DirectionSelector);
             this.Controls.Add(this.SpeedLabel);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.PbMain);
             this.Controls.Add(this.NextStepButton);
             this.Controls.Add(this.SpeedBar);
             this.Controls.Add(this.StartStopButton);
@@ -144,7 +145,7 @@
             this.Text = "Form1";
             this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
             ((System.ComponentModel.ISupportInitialize)(this.SpeedBar)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PbMain)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -156,7 +157,7 @@
         private System.Windows.Forms.Button StartStopButton;
         private System.Windows.Forms.TrackBar SpeedBar;
         private System.Windows.Forms.Button NextStepButton;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox PbMain;
         private System.Windows.Forms.Label SpeedLabel;
         private System.Windows.Forms.ComboBox DirectionSelector;
         private System.Windows.Forms.Label label1;

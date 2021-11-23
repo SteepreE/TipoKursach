@@ -12,24 +12,28 @@ namespace TipoKursach
 {
     public partial class Form1 : Form
     {
-        enum Direction
+        private enum Direction
         {
             Top,
             Bottom,
             Center
         }
 
+        private Direction _direction;
+
         public static Random rand = new Random();
 
-        private List<Particle> _particles = new List<Particle>();
-
-        private Direction _direction;
+        public static List<Particle> _particles = new List<Particle>();
+        public static ColorCircle _colorCircle;
 
         public Form1()
         {
             InitializeComponent();
-            pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+
+            PbMain.Image = new Bitmap(PbMain.Width, PbMain.Height);
             DirectionSelector.DataSource = Enum.GetValues(typeof(Direction));
+
+            InitColorCircle();
         }
 
         private void InitParticles()
@@ -42,6 +46,20 @@ namespace TipoKursach
             }
         }
 
+        private void InitColorCircle()
+        {
+            _colorCircle = new ColorCircle(
+                PbMain.Image.Width / 2,
+                PbMain.Image.Height / 2,
+                30
+                );
+
+            _colorCircle.OnParticleOverlap += (prt) =>
+            {
+                (prt as Particle).SetColor(_colorCircle.GetColor());
+            };
+        }
+
         private Particle GenerateParticle()
         {
             float angle, x, y;
@@ -49,22 +67,21 @@ namespace TipoKursach
             switch (_direction)
             {
                 case Direction.Top:
-                    x = rand.Next(pictureBox1.Image.Width);
+                    x = rand.Next(PbMain.Image.Width);
                     y = 0;
                     angle = 225 + rand.Next(90);
                     break;
                 case Direction.Bottom:
-                    x = rand.Next(pictureBox1.Image.Width);
-                    y = pictureBox1.Image.Height;
+                    x = rand.Next(PbMain.Image.Width);
+                    y = PbMain.Image.Height;
                     angle = 45 + rand.Next(90);
                     break;
                 default:
-                    x = pictureBox1.Image.Width / 2;
-                    y = pictureBox1.Image.Height / 2;
+                    x = PbMain.Image.Width / 2;
+                    y = PbMain.Image.Height / 2;
                     angle = rand.Next(360);
                     break;
             }
-                
 
             var particle = new Particle(
                 x, y, angle,
@@ -97,12 +114,17 @@ namespace TipoKursach
         {
             foreach (var particle in _particles.ToArray())
             {
-                if (particle.IsLeftScreen(pictureBox1))
+                if (particle.IsLeftScreen(PbMain))
                 {
                     particle.Destroy();
                 } else
                 {
                     particle.Move();
+                }
+
+                if (_colorCircle.OvelapsWith(particle))
+                {
+                    _colorCircle.OverlapParticle(particle);
                 }
             }
         }
@@ -111,7 +133,7 @@ namespace TipoKursach
         {
             UpdateParticlesState();
 
-            using (var g = Graphics.FromImage(pictureBox1.Image))
+            using (var g = Graphics.FromImage(PbMain.Image))
             {
                 g.Clear(Color.White);
 
@@ -119,9 +141,11 @@ namespace TipoKursach
                 {
                     particle.Draw(g);
                 }
+
+                _colorCircle.Draw(g);
             }
 
-            pictureBox1.Invalidate();
+            PbMain.Invalidate();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -141,10 +165,10 @@ namespace TipoKursach
 
         private void Form1_SizeChanged(object sender, EventArgs e)
         {
-            pictureBox1.Height = Height;
-            pictureBox1.Width = Width;
+            PbMain.Height = Height;
+            PbMain.Width = Width;
 
-            pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            PbMain.Image = new Bitmap(PbMain.Width, PbMain.Height);
         }
 
         private void DirectionSelector_SelectionChangeCommitted(object sender, EventArgs e)
@@ -178,6 +202,24 @@ namespace TipoKursach
             else
             {
                 InfoLabel.Visible = false;
+            }
+        }
+
+        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                _colorCircle.SetCoordinates(e.X, e.Y);
+            }
+
+            if (e.Button == MouseButtons.Left)
+            {
+                if (Math.Pow(e.X - _colorCircle.GetX(), 2) +
+                    Math.Pow(e.Y - _colorCircle.GetY(), 2) <= Math.Pow(_colorCircle.GetRadius(), 2))
+                {
+                    var circleForm = new ColorCIrcleSettings();
+                    circleForm.ShowDialog();
+                }
             }
         }
     }

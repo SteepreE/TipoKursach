@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace TipoKursach
 {
-    class Particle
+    public class Particle
     {
         private float _x;
         private float _y;
@@ -19,6 +19,7 @@ namespace TipoKursach
         private int _radius;
 
         private float _life;
+        private Color _color = Color.Black;
 
         public Action<Particle> OnDestroy;
 
@@ -51,6 +52,11 @@ namespace TipoKursach
         public void Destroy()
         {
             OnDestroy?.Invoke(this);
+        }
+
+        public void SetColor(Color color)
+        {
+            _color = color;
         }
 
         public bool IsLeftScreen(PictureBox pictureBox)
@@ -86,7 +92,7 @@ namespace TipoKursach
         {
             float k = Math.Min(1f, _life / 100);
             int alpha = (int)(k * 255);
-            var color = Color.FromArgb(alpha, Color.Black);
+            var color = Color.FromArgb(alpha, _color);
 
             var b = new SolidBrush(color);
 
