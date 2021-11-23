@@ -12,14 +12,24 @@ namespace TipoKursach
 {
     public partial class Form1 : Form
     {
+        enum Direction
+        {
+            Top,
+            Bottom,
+            Center
+        }
+
         public static Random rand = new Random();
 
         private List<Particle> _particles = new List<Particle>();
+
+        private Direction _direction;
 
         public Form1()
         {
             InitializeComponent();
             pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            DirectionSelector.DataSource = Enum.GetValues(typeof(Direction));
         }
 
         private void InitParticles()
@@ -34,13 +44,42 @@ namespace TipoKursach
 
         private Particle GenerateParticle()
         {
-            return new Particle(
-                rand.Next(pictureBox1.Width),
-                0,
-                225 + rand.Next(90),
+            float angle, x, y;
+
+            switch (_direction)
+            {
+                case Direction.Top:
+                    x = rand.Next(pictureBox1.Image.Width);
+                    y = 0;
+                    angle = 225 + rand.Next(90);
+                    break;
+                case Direction.Bottom:
+                    x = rand.Next(pictureBox1.Image.Width);
+                    y = pictureBox1.Image.Height;
+                    angle = 45 + rand.Next(90);
+                    break;
+                default:
+                    x = pictureBox1.Image.Width / 2;
+                    y = pictureBox1.Image.Height / 2;
+                    angle = rand.Next(360);
+                    break;
+            }
+                
+
+            var particle = new Particle(
+                x, y, angle,
                 1 + rand.Next(10),
-                2 + rand.Next(10)
+                2 + rand.Next(10),
+                20 + rand.Next(100)
                 );
+
+            particle.OnDestroy += (prt) =>
+            {
+                _particles.Remove(prt);
+                _particles.Add(GenerateParticle());
+            };
+
+            return particle;
         }
 
         private void StartStopButton_Click(object sender, EventArgs e)
@@ -60,8 +99,7 @@ namespace TipoKursach
             {
                 if (particle.IsLeftScreen(pictureBox1))
                 {
-                    _particles.Remove(particle);
-                    _particles.Add(GenerateParticle());
+                    particle.Destroy();
                 } else
                 {
                     particle.Move();
@@ -82,12 +120,13 @@ namespace TipoKursach
                     particle.Draw(g);
                 }
             }
+
+            pictureBox1.Invalidate();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             UpdateFrame();
-            pictureBox1.Invalidate();
         }
 
         private void SpeedBar_Scroll(object sender, EventArgs e)
@@ -98,7 +137,6 @@ namespace TipoKursach
         private void NextStepButton_Click(object sender, EventArgs e)
         {
             UpdateFrame();
-            pictureBox1.Invalidate();
         }
 
         private void Form1_SizeChanged(object sender, EventArgs e)
@@ -107,6 +145,14 @@ namespace TipoKursach
             pictureBox1.Width = Width;
 
             pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+        }
+
+        private void DirectionSelector_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            _direction = (Direction)DirectionSelector.SelectedItem;
+
+            _particles.Clear();
+            InitParticles();
         }
     }
 }

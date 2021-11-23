@@ -35,6 +35,7 @@
             this.NextStepButton = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.SpeedLabel = new System.Windows.Forms.Label();
+            this.DirectionSelector = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.SpeedBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -91,11 +92,23 @@
             this.SpeedLabel.TabIndex = 5;
             this.SpeedLabel.Text = "Speed";
             // 
+            // DirectionSelector
+            // 
+            this.DirectionSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.DirectionSelector.FormattingEnabled = true;
+            this.DirectionSelector.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.DirectionSelector.Location = new System.Drawing.Point(667, 8);
+            this.DirectionSelector.Name = "DirectionSelector";
+            this.DirectionSelector.Size = new System.Drawing.Size(121, 21);
+            this.DirectionSelector.TabIndex = 6;
+            this.DirectionSelector.SelectionChangeCommitted += new System.EventHandler(this.DirectionSelector_SelectionChangeCommitted);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 442);
+            this.Controls.Add(this.DirectionSelector);
             this.Controls.Add(this.SpeedLabel);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.NextStepButton);
@@ -119,6 +132,7 @@
         private System.Windows.Forms.Button NextStepButton;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label SpeedLabel;
+        private System.Windows.Forms.ComboBox DirectionSelector;
     }
 }
 
