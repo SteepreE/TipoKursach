@@ -41,6 +41,7 @@
             // 
             // timer1
             // 
+            this.timer1.Interval = 40;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // StartStopButton
@@ -60,7 +61,7 @@
             this.SpeedBar.RightToLeftLayout = true;
             this.SpeedBar.Size = new System.Drawing.Size(104, 45);
             this.SpeedBar.TabIndex = 1;
-            this.SpeedBar.Value = 5;
+            this.SpeedBar.Value = 10;
             this.SpeedBar.Scroll += new System.EventHandler(this.SpeedBar_Scroll);
             // 
             // NextStepButton
