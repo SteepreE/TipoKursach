@@ -60,6 +60,28 @@ namespace TipoKursach
                 || _y > pictureBox.Image.Height);
         }
 
+        public String GetInfo()
+        {
+            return $"X: {_x}\n" +
+                $"Y: {_y}\n" +
+                $"Life: {_life}\n";
+        }
+
+        public float GetX()
+        {
+            return _x;
+        }
+
+        public float GetY()
+        {
+            return _y;
+        }
+
+        public float GetRadius()
+        {
+            return _radius;
+        }
+
         public void Draw(Graphics g)
         {
             float k = Math.Min(1f, _life / 100);
