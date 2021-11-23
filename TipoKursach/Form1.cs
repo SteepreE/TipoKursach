@@ -19,6 +19,9 @@ namespace TipoKursach
         public Form1()
         {
             InitializeComponent();
+            pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+
+            InitParticles();
         }
 
         private void InitParticles()
@@ -27,17 +30,17 @@ namespace TipoKursach
             {
                 var particle = GenerateParticle();
 
-
+                _particles.Add(particle);
             }
         }
 
         private Particle GenerateParticle()
         {
             return new Particle(
-                rand.Next(360),
+                rand.Next(pictureBox1.Width),
                 0,
-                rand.Next(180),
-                1 + rand.Next(360),
+                225 + rand.Next(90),
+                1 + rand.Next(10),
                 2 + rand.Next(10)
                 );
         }
@@ -50,12 +53,22 @@ namespace TipoKursach
 
         private void UpdateFrame()
         {
+            using (var g = Graphics.FromImage(pictureBox1.Image))
+            {
+                g.Clear(Color.White);
 
+                foreach (var particle in _particles)
+                {
+                    particle.Move();
+                    particle.Draw(g);
+                }
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             UpdateFrame();
+            pictureBox1.Invalidate();
         }
 
         private void SpeedBar_Scroll(object sender, EventArgs e)
@@ -66,6 +79,7 @@ namespace TipoKursach
         private void NextStepButton_Click(object sender, EventArgs e)
         {
             UpdateFrame();
+            pictureBox1.Invalidate();
         }
     }
 }

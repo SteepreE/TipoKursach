@@ -26,6 +26,13 @@ namespace TipoKursach
             _radius = radius;
         }
 
+        public void Move()
+        {
+            var directionInRadians = _direction / 180 * Math.PI;
+            _x += (float)(_speed * Math.Cos(directionInRadians));
+            _y -= (float)(_speed * Math.Sin(directionInRadians));
+        }
+
         public void Draw(Graphics g)
         {
             var b = new SolidBrush(Color.Black);
