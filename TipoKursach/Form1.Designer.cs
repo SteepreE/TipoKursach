@@ -46,7 +46,7 @@
             // 
             // StartStopButton
             // 
-            this.StartStopButton.Location = new System.Drawing.Point(12, 392);
+            this.StartStopButton.Location = new System.Drawing.Point(12, 8);
             this.StartStopButton.Name = "StartStopButton";
             this.StartStopButton.Size = new System.Drawing.Size(75, 23);
             this.StartStopButton.TabIndex = 0;
@@ -56,7 +56,7 @@
             // 
             // SpeedBar
             // 
-            this.SpeedBar.Location = new System.Drawing.Point(93, 392);
+            this.SpeedBar.Location = new System.Drawing.Point(93, 8);
             this.SpeedBar.Name = "SpeedBar";
             this.SpeedBar.RightToLeftLayout = true;
             this.SpeedBar.Size = new System.Drawing.Size(104, 45);
@@ -66,7 +66,7 @@
             // 
             // NextStepButton
             // 
-            this.NextStepButton.Location = new System.Drawing.Point(12, 414);
+            this.NextStepButton.Location = new System.Drawing.Point(12, 30);
             this.NextStepButton.Name = "NextStepButton";
             this.NextStepButton.Size = new System.Drawing.Size(75, 23);
             this.NextStepButton.TabIndex = 3;
@@ -76,7 +76,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(12, 59);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(776, 374);
             this.pictureBox1.TabIndex = 4;
@@ -85,7 +85,7 @@
             // SpeedLabel
             // 
             this.SpeedLabel.AutoSize = true;
-            this.SpeedLabel.Location = new System.Drawing.Point(128, 424);
+            this.SpeedLabel.Location = new System.Drawing.Point(128, 40);
             this.SpeedLabel.Name = "SpeedLabel";
             this.SpeedLabel.Size = new System.Drawing.Size(38, 13);
             this.SpeedLabel.TabIndex = 5;
@@ -103,6 +103,7 @@
             this.Controls.Add(this.StartStopButton);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
             ((System.ComponentModel.ISupportInitialize)(this.SpeedBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

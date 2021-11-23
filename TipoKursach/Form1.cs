@@ -20,13 +20,11 @@ namespace TipoKursach
         {
             InitializeComponent();
             pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-
-            InitParticles();
         }
 
         private void InitParticles()
         {
-            for (int i = 0; i < 500; i++)
+            for (int i = 0; i < 1500; i++)
             {
                 var particle = GenerateParticle();
 
@@ -47,19 +45,40 @@ namespace TipoKursach
 
         private void StartStopButton_Click(object sender, EventArgs e)
         {
+            if (_particles.Count == 0)
+            {
+                InitParticles();
+            }
+
             timer1.Enabled = !timer1.Enabled;
             StartStopButton.Text = (timer1.Enabled) ? "Stop" : "Start";
         }
 
+        private void UpdateParticlesState()
+        {
+            foreach (var particle in _particles.ToArray())
+            {
+                if (particle.IsLeftScreen(pictureBox1))
+                {
+                    _particles.Remove(particle);
+                    _particles.Add(GenerateParticle());
+                } else
+                {
+                    particle.Move();
+                }
+            }
+        }
+
         private void UpdateFrame()
         {
+            UpdateParticlesState();
+
             using (var g = Graphics.FromImage(pictureBox1.Image))
             {
                 g.Clear(Color.White);
 
-                foreach (var particle in _particles)
+                foreach (var particle in _particles.ToArray())
                 {
-                    particle.Move();
                     particle.Draw(g);
                 }
             }
@@ -80,6 +99,14 @@ namespace TipoKursach
         {
             UpdateFrame();
             pictureBox1.Invalidate();
+        }
+
+        private void Form1_SizeChanged(object sender, EventArgs e)
+        {
+            pictureBox1.Height = Height;
+            pictureBox1.Width = Width;
+
+            pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
         }
     }
 }

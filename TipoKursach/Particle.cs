@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace TipoKursach
 {
@@ -31,6 +32,11 @@ namespace TipoKursach
             var directionInRadians = _direction / 180 * Math.PI;
             _x += (float)(_speed * Math.Cos(directionInRadians));
             _y -= (float)(_speed * Math.Sin(directionInRadians));
+        }
+
+        public bool IsLeftScreen(PictureBox pictureBox)
+        {
+            return (_x + _radius < 0 || _x > pictureBox.Image.Width || _y > pictureBox.Image.Height);
         }
 
         public void Draw(Graphics g)
