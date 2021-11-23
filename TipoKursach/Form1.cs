@@ -22,7 +22,6 @@ namespace TipoKursach
         private Direction _direction;
 
         public static Random rand = new Random();
-
         public static List<Particle> _particles = new List<Particle>();
         public static ColorCircle _colorCircle;
 
@@ -38,7 +37,7 @@ namespace TipoKursach
 
         private void InitParticles()
         {
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < (int)ParticlesCounter.Value; i++)
             {
                 var particle = GenerateParticle();
 
@@ -181,38 +180,46 @@ namespace TipoKursach
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            Particle selectedParticles = null;
-
-            foreach (var particle in _particles)
+            if (Math.Pow(e.X - _colorCircle.GetX(), 2) +
+                Math.Pow(e.Y - _colorCircle.GetY(), 2) <= Math.Pow(_colorCircle.GetRadius(), 2))
             {
-                if (Math.Pow(e.X - particle.GetX(), 2) +
-                    Math.Pow(e.Y - particle.GetY(), 2) <= Math.Pow(particle.GetRadius(), 2))
-                {
-                    selectedParticles = particle;
-                    break;
-                }
-            }
-
-            if (selectedParticles != null)
-            {
-                InfoLabel.Text = selectedParticles.GetInfo();
-                InfoLabel.Location = new Point(e.X, e.Y);
-                InfoLabel.Visible = true;
+                
             }
             else
             {
-                InfoLabel.Visible = false;
+                Particle selectedParticles = null;
+
+                foreach (var particle in _particles)
+                {
+                    if (Math.Pow(e.X - particle.GetX(), 2) +
+                        Math.Pow(e.Y - particle.GetY(), 2) <= Math.Pow(particle.GetRadius(), 2))
+                    {
+                        selectedParticles = particle;
+                        break;
+                    }
+                }
+
+                if (selectedParticles != null)
+                {
+                    InfoLabel.Text = selectedParticles.GetInfo();
+                    InfoLabel.Location = new Point(e.X, e.Y);
+                    InfoLabel.Visible = true;
+                }
+                else
+                {
+                    InfoLabel.Visible = false;
+                }
             }
         }
 
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
+            if (e.Button == MouseButtons.Left)
             {
                 _colorCircle.SetCoordinates(e.X, e.Y);
             }
 
-            if (e.Button == MouseButtons.Left)
+            if (e.Button == MouseButtons.Right)
             {
                 if (Math.Pow(e.X - _colorCircle.GetX(), 2) +
                     Math.Pow(e.Y - _colorCircle.GetY(), 2) <= Math.Pow(_colorCircle.GetRadius(), 2))
@@ -221,6 +228,21 @@ namespace TipoKursach
                     circleForm.ShowDialog();
                 }
             }
+        }
+
+        private void ParticlesCounter_ValueChanged(object sender, EventArgs e)
+        {
+            if ((int)ParticlesCounter.Value > _particles.Count())
+                while ((int)ParticlesCounter.Value > _particles.Count())
+                {
+                    _particles.Add(GenerateParticle());
+                }
+            
+            if ((int)ParticlesCounter.Value < _particles.Count())
+                while ((int)ParticlesCounter.Value < _particles.Count())
+                {
+                    _particles.RemoveAt(0);
+                }
         }
     }
 }

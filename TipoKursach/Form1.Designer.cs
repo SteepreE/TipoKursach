@@ -38,8 +38,11 @@
             this.DirectionSelector = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.InfoLabel = new System.Windows.Forms.Label();
+            this.ParticlesCounter = new System.Windows.Forms.NumericUpDown();
+            this.ParticlesCountLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.SpeedBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbMain)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ParticlesCounter)).BeginInit();
             this.SuspendLayout();
             // 
             // timer1
@@ -128,11 +131,45 @@
             this.InfoLabel.TabIndex = 8;
             this.InfoLabel.Visible = false;
             // 
+            // ParticlesCounter
+            // 
+            this.ParticlesCounter.Location = new System.Drawing.Point(340, 8);
+            this.ParticlesCounter.Maximum = new decimal(new int[] {
+            1500,
+            0,
+            0,
+            0});
+            this.ParticlesCounter.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.ParticlesCounter.Name = "ParticlesCounter";
+            this.ParticlesCounter.Size = new System.Drawing.Size(120, 20);
+            this.ParticlesCounter.TabIndex = 9;
+            this.ParticlesCounter.Value = new decimal(new int[] {
+            150,
+            0,
+            0,
+            0});
+            this.ParticlesCounter.ValueChanged += new System.EventHandler(this.ParticlesCounter_ValueChanged);
+            // 
+            // ParticlesCountLabel
+            // 
+            this.ParticlesCountLabel.AutoSize = true;
+            this.ParticlesCountLabel.Location = new System.Drawing.Point(352, 40);
+            this.ParticlesCountLabel.Name = "ParticlesCountLabel";
+            this.ParticlesCountLabel.Size = new System.Drawing.Size(77, 13);
+            this.ParticlesCountLabel.TabIndex = 10;
+            this.ParticlesCountLabel.Text = "Particles count";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 442);
+            this.Controls.Add(this.ParticlesCountLabel);
+            this.Controls.Add(this.ParticlesCounter);
             this.Controls.Add(this.InfoLabel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.DirectionSelector);
@@ -146,6 +183,7 @@
             this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
             ((System.ComponentModel.ISupportInitialize)(this.SpeedBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbMain)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ParticlesCounter)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -162,6 +200,8 @@
         private System.Windows.Forms.ComboBox DirectionSelector;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label InfoLabel;
+        private System.Windows.Forms.NumericUpDown ParticlesCounter;
+        private System.Windows.Forms.Label ParticlesCountLabel;
     }
 }
 
