@@ -32,8 +32,11 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.StartStopButton = new System.Windows.Forms.Button();
             this.SpeedBar = new System.Windows.Forms.TrackBar();
-            this.label1 = new System.Windows.Forms.Label();
+            this.NextStepButton = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.SpeedLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.SpeedBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // timer1
@@ -42,42 +45,65 @@
             // 
             // StartStopButton
             // 
-            this.StartStopButton.Location = new System.Drawing.Point(12, 415);
+            this.StartStopButton.Location = new System.Drawing.Point(12, 392);
             this.StartStopButton.Name = "StartStopButton";
             this.StartStopButton.Size = new System.Drawing.Size(75, 23);
             this.StartStopButton.TabIndex = 0;
-            this.StartStopButton.Text = "Старт";
+            this.StartStopButton.Text = "Start";
             this.StartStopButton.UseVisualStyleBackColor = true;
             this.StartStopButton.Click += new System.EventHandler(this.StartStopButton_Click);
             // 
             // SpeedBar
             // 
-            this.SpeedBar.Location = new System.Drawing.Point(93, 393);
+            this.SpeedBar.Location = new System.Drawing.Point(93, 392);
             this.SpeedBar.Name = "SpeedBar";
+            this.SpeedBar.RightToLeftLayout = true;
             this.SpeedBar.Size = new System.Drawing.Size(104, 45);
             this.SpeedBar.TabIndex = 1;
+            this.SpeedBar.Value = 5;
             this.SpeedBar.Scroll += new System.EventHandler(this.SpeedBar_Scroll);
             // 
-            // label1
+            // NextStepButton
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(328, 200);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "label1";
+            this.NextStepButton.Location = new System.Drawing.Point(12, 414);
+            this.NextStepButton.Name = "NextStepButton";
+            this.NextStepButton.Size = new System.Drawing.Size(75, 23);
+            this.NextStepButton.TabIndex = 3;
+            this.NextStepButton.Text = "Next Step";
+            this.NextStepButton.UseVisualStyleBackColor = true;
+            this.NextStepButton.Click += new System.EventHandler(this.NextStepButton_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(776, 374);
+            this.pictureBox1.TabIndex = 4;
+            this.pictureBox1.TabStop = false;
+            // 
+            // SpeedLabel
+            // 
+            this.SpeedLabel.AutoSize = true;
+            this.SpeedLabel.Location = new System.Drawing.Point(128, 424);
+            this.SpeedLabel.Name = "SpeedLabel";
+            this.SpeedLabel.Size = new System.Drawing.Size(38, 13);
+            this.SpeedLabel.TabIndex = 5;
+            this.SpeedLabel.Text = "Speed";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(800, 442);
+            this.Controls.Add(this.SpeedLabel);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.NextStepButton);
             this.Controls.Add(this.SpeedBar);
             this.Controls.Add(this.StartStopButton);
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.SpeedBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -88,7 +114,9 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button StartStopButton;
         private System.Windows.Forms.TrackBar SpeedBar;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button NextStepButton;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label SpeedLabel;
     }
 }
 
