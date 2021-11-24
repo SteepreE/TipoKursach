@@ -33,15 +33,20 @@ namespace TipoKursach
             DirectionSelector.DataSource = Enum.GetValues(typeof(Direction));
 
             InitColorCircle();
+            StartStopTimer();
         }
 
-        private void InitParticles()
+        private void ChangeParticlesCount()
         {
-            for (int i = 0; i < (int)ParticlesCounter.Value; i++)
+            for (int i = 0; i < 10; i++)
             {
-                var particle = GenerateParticle();
-
-                _particles.Add(particle);
+                if (_particles.Count < (int)ParticlesCounter.Value)
+                {
+                    _particles.Add(GenerateParticle());
+                } else if (_particles.Count > (int)ParticlesCounter.Value)
+                {
+                    _particles.RemoveAt(0);
+                }
             }
         }
 
@@ -100,17 +105,19 @@ namespace TipoKursach
 
         private void StartStopButton_Click(object sender, EventArgs e)
         {
-            if (_particles.Count == 0)
-            {
-                InitParticles();
-            }
+            StartStopTimer();
+        }
 
+        private void StartStopTimer()
+        {
             timer1.Enabled = !timer1.Enabled;
             StartStopButton.Text = (timer1.Enabled) ? "Stop" : "Start";
         }
 
         private void UpdateParticlesState()
         {
+            ChangeParticlesCount();
+
             foreach (var particle in _particles.ToArray())
             {
                 if (particle.IsLeftScreen(PbMain))
@@ -164,8 +171,8 @@ namespace TipoKursach
 
         private void Form1_SizeChanged(object sender, EventArgs e)
         {
-            PbMain.Height = Height;
-            PbMain.Width = Width;
+            PbMain.Height = Height - 105;
+            PbMain.Width = Width - 40;
 
             PbMain.Image = new Bitmap(PbMain.Width, PbMain.Height);
         }
@@ -175,40 +182,31 @@ namespace TipoKursach
             _direction = (Direction)DirectionSelector.SelectedItem;
 
             _particles.Clear();
-            InitParticles();
         }
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (Math.Pow(e.X - _colorCircle.GetX(), 2) +
-                Math.Pow(e.Y - _colorCircle.GetY(), 2) <= Math.Pow(_colorCircle.GetRadius(), 2))
+            Particle selectedParticles = null;
+
+            foreach (var particle in _particles)
             {
-                
+                if (Math.Pow(e.X - particle.GetX(), 2) +
+                    Math.Pow(e.Y - particle.GetY(), 2) <= Math.Pow(particle.GetRadius(), 2))
+                {
+                    selectedParticles = particle;
+                    break;
+                }
+            }
+
+            if (selectedParticles != null)
+            {
+                InfoLabel.Text = selectedParticles.GetInfo();
+                InfoLabel.Location = new Point(e.X, e.Y);
+                InfoLabel.Visible = true;
             }
             else
             {
-                Particle selectedParticles = null;
-
-                foreach (var particle in _particles)
-                {
-                    if (Math.Pow(e.X - particle.GetX(), 2) +
-                        Math.Pow(e.Y - particle.GetY(), 2) <= Math.Pow(particle.GetRadius(), 2))
-                    {
-                        selectedParticles = particle;
-                        break;
-                    }
-                }
-
-                if (selectedParticles != null)
-                {
-                    InfoLabel.Text = selectedParticles.GetInfo();
-                    InfoLabel.Location = new Point(e.X, e.Y);
-                    InfoLabel.Visible = true;
-                }
-                else
-                {
-                    InfoLabel.Visible = false;
-                }
+                InfoLabel.Visible = false;
             }
         }
 
@@ -228,21 +226,6 @@ namespace TipoKursach
                     circleForm.ShowDialog();
                 }
             }
-        }
-
-        private void ParticlesCounter_ValueChanged(object sender, EventArgs e)
-        {
-            if ((int)ParticlesCounter.Value > _particles.Count())
-                while ((int)ParticlesCounter.Value > _particles.Count())
-                {
-                    _particles.Add(GenerateParticle());
-                }
-            
-            if ((int)ParticlesCounter.Value < _particles.Count())
-                while ((int)ParticlesCounter.Value < _particles.Count())
-                {
-                    _particles.RemoveAt(0);
-                }
         }
     }
 }

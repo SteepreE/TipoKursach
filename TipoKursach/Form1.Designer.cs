@@ -135,7 +135,7 @@
             // 
             this.ParticlesCounter.Location = new System.Drawing.Point(340, 8);
             this.ParticlesCounter.Maximum = new decimal(new int[] {
-            1500,
+            15000,
             0,
             0,
             0});
@@ -152,7 +152,6 @@
             0,
             0,
             0});
-            this.ParticlesCounter.ValueChanged += new System.EventHandler(this.ParticlesCounter_ValueChanged);
             // 
             // ParticlesCountLabel
             // 
