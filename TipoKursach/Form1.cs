@@ -22,6 +22,9 @@ namespace TipoKursach
         private Direction _direction;
 
         public static Random rand = new Random();
+
+        private List<List<Particle>> _generations = new List<List<Particle>>();
+        
         public static List<Particle> _particles = new List<Particle>();
         public static ColorCircle _colorCircle;
 
@@ -31,6 +34,8 @@ namespace TipoKursach
 
             PbMain.Image = new Bitmap(PbMain.Width, PbMain.Height);
             DirectionSelector.DataSource = Enum.GetValues(typeof(Direction));
+
+            _generations.Add(_particles);
 
             InitColorCircle();
             StartStopTimer();
@@ -110,6 +115,12 @@ namespace TipoKursach
 
         private void StartStopTimer()
         {
+            if (GenerationBar.Value != GenerationBar.Maximum)
+            {
+                MessageBox.Show("NIZYA!");
+                return;
+            }
+
             timer1.Enabled = !timer1.Enabled;
             StartStopButton.Text = (timer1.Enabled) ? "Stop" : "Start";
         }
@@ -135,10 +146,41 @@ namespace TipoKursach
             }
         }
 
+        public void AddNewGeneration()
+        {
+            if (GenerationBar.Maximum < 50)
+            {
+                _generations.Add(_particles);
+                GenerationBar.Maximum += 1;
+                GenerationBar.Value = GenerationBar.Maximum;
+            }
+            else
+            {
+                _generations.RemoveAt(0);
+                _generations.Add(_particles);
+            }
+        }
+
+        private void AddLastGen()
+        {
+            var lastGeneration = new List<Particle>();
+
+            foreach (var particle in _particles)
+            {
+                lastGeneration.Add(new Particle(particle));
+            }
+
+            _generations[GenerationBar.Maximum] = lastGeneration;
+        }
+
         private void UpdateFrame()
         {
             UpdateParticlesState();
+            RenderObjs();
+        }
 
+        private void RenderObjs()
+        {
             using (var g = Graphics.FromImage(PbMain.Image))
             {
                 g.Clear(Color.White);
@@ -156,7 +198,9 @@ namespace TipoKursach
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            AddLastGen();
             UpdateFrame();
+            AddNewGeneration();
         }
 
         private void SpeedBar_Scroll(object sender, EventArgs e)
@@ -166,7 +210,15 @@ namespace TipoKursach
 
         private void NextStepButton_Click(object sender, EventArgs e)
         {
+            if (GenerationBar.Value != GenerationBar.Maximum)
+            {
+                MessageBox.Show("NIZYA!");
+                return;
+            }
+
+            AddLastGen();
             UpdateFrame();
+            AddNewGeneration();
         }
 
         private void Form1_SizeChanged(object sender, EventArgs e)
@@ -226,6 +278,15 @@ namespace TipoKursach
                     circleForm.ShowDialog();
                 }
             }
+        }
+
+        private void GenerationBar_Scroll(object sender, EventArgs e)
+        {
+            timer1.Enabled = false;
+
+            _particles = _generations[GenerationBar.Value];
+
+            RenderObjs();
         }
     }
 }

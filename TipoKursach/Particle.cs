@@ -33,6 +33,16 @@ namespace TipoKursach
             _life = life;
         }
 
+        public Particle(Particle particle)
+        {
+            _x = particle.GetX();
+            _y = particle.GetY();
+            _direction = particle.GetDirection();
+            _speed = particle.GetSpeed();
+            _radius = particle.GetRadius();
+            _life = particle.GetLife();
+        }
+
         public void Move()
         {
             var directionInRadians = _direction / 180 * Math.PI;
@@ -46,7 +56,7 @@ namespace TipoKursach
         {
             _life--;
 
-            if (_life == 0) Destroy();
+            if (_life <= 0) Destroy();
         }
 
         public void Destroy()
@@ -73,6 +83,21 @@ namespace TipoKursach
                 $"Life: {_life}\n";
         }
 
+        public float GetDirection()
+        {
+            return _direction;
+        }
+
+        public float GetSpeed()
+        {
+            return _speed;
+        }
+
+        public float GetLife()
+        {
+            return _life;
+        }
+
         public float GetX()
         {
             return _x;
@@ -83,7 +108,7 @@ namespace TipoKursach
             return _y;
         }
 
-        public float GetRadius()
+        public int GetRadius()
         {
             return _radius;
         }
