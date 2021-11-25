@@ -37,11 +37,11 @@
             this.SpeedLabel = new System.Windows.Forms.Label();
             this.DirectionSelector = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.InfoLabel = new System.Windows.Forms.Label();
             this.ParticlesCounter = new System.Windows.Forms.NumericUpDown();
             this.ParticlesCountLabel = new System.Windows.Forms.Label();
             this.GenerationBar = new System.Windows.Forms.TrackBar();
             this.GenerationBarLabel = new System.Windows.Forms.Label();
+            this.InfoLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.SpeedBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbMain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ParticlesCounter)).BeginInit();
@@ -122,18 +122,6 @@
             this.label1.TabIndex = 7;
             this.label1.Text = "Direction";
             // 
-            // InfoLabel
-            // 
-            this.InfoLabel.AutoSize = true;
-            this.InfoLabel.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.InfoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
-            this.InfoLabel.ForeColor = System.Drawing.SystemColors.Control;
-            this.InfoLabel.Location = new System.Drawing.Point(753, 8);
-            this.InfoLabel.Name = "InfoLabel";
-            this.InfoLabel.Size = new System.Drawing.Size(0, 16);
-            this.InfoLabel.TabIndex = 8;
-            this.InfoLabel.Visible = false;
-            // 
             // ParticlesCounter
             // 
             this.ParticlesCounter.Location = new System.Drawing.Point(340, 8);
@@ -183,6 +171,18 @@
             this.GenerationBarLabel.TabIndex = 12;
             this.GenerationBarLabel.Text = "Generation";
             // 
+            // InfoLabel
+            // 
+            this.InfoLabel.AutoSize = true;
+            this.InfoLabel.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.InfoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.25F);
+            this.InfoLabel.ForeColor = System.Drawing.SystemColors.Control;
+            this.InfoLabel.Location = new System.Drawing.Point(22, 59);
+            this.InfoLabel.Name = "InfoLabel";
+            this.InfoLabel.Size = new System.Drawing.Size(0, 16);
+            this.InfoLabel.TabIndex = 8;
+            this.InfoLabel.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -222,11 +222,11 @@
         private System.Windows.Forms.Label SpeedLabel;
         private System.Windows.Forms.ComboBox DirectionSelector;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label InfoLabel;
         private System.Windows.Forms.NumericUpDown ParticlesCounter;
         private System.Windows.Forms.Label ParticlesCountLabel;
         private System.Windows.Forms.TrackBar GenerationBar;
         private System.Windows.Forms.Label GenerationBarLabel;
+        private System.Windows.Forms.Label InfoLabel;
     }
 }
 

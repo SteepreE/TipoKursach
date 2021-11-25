@@ -19,6 +19,9 @@ namespace TipoKursach
         private int _radius;
 
         private float _life;
+
+        private bool _isLockedInfo = false;
+
         private Color _color = Color.Black;
 
         public Action<Particle> OnDestroy;
@@ -41,6 +44,7 @@ namespace TipoKursach
             _speed = particle.GetSpeed();
             _radius = particle.GetRadius();
             _life = particle.GetLife();
+            _isLockedInfo = particle.IsLocedInfo();
         }
 
         public void Move()
@@ -74,6 +78,11 @@ namespace TipoKursach
             return (_x + _radius < 0 
                 || _x > pictureBox.Image.Width 
                 || _y > pictureBox.Image.Height);
+        }
+
+        public bool IsLocedInfo()
+        {
+            return _isLockedInfo;
         }
 
         public String GetInfo()
@@ -113,8 +122,30 @@ namespace TipoKursach
             return _radius;
         }
 
+        public void LockInfo()
+        {
+            _isLockedInfo = true;
+        }
+
+        public void UnlockInfo()
+        {
+            _isLockedInfo = false;
+        }
+
+        public void ShowInfo(Graphics g)
+        {
+            using (Font font1 = new Font("Microsoft Sans Serif", 9, FontStyle.Bold, GraphicsUnit.Pixel))
+            {
+                Point pos = new Point((int)_x, (int)_y);
+
+                g.DrawString(GetInfo(), font1, Brushes.Black, pos);
+            }
+        }
+
         public void Draw(Graphics g)
         {
+            if (_isLockedInfo) ShowInfo(g);
+
             float k = Math.Min(1f, _life / 100);
             int alpha = (int)(k * 255);
             var color = Color.FromArgb(alpha, _color);
