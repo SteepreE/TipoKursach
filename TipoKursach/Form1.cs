@@ -277,13 +277,7 @@ namespace TipoKursach
                     else _cureentParticle.UnlockInfo();
 
                     RenderObjs();
-                } else if (Math.Pow(e.X - _colorCircle.GetX(), 2) +
-                    Math.Pow(e.Y - _colorCircle.GetY(), 2) <= Math.Pow(_colorCircle.GetRadius(), 2))
-                {
-                    var circleForm = new ColorCIrcleSettings();
-                    circleForm.ShowDialog();
                 }
-
             }
 
             if (e.Button == MouseButtons.Right)
@@ -299,6 +293,12 @@ namespace TipoKursach
             _particles = _generations[GenerationBar.Value];
 
             RenderObjs();
+        }
+
+        private void CircleSettingsBtn_Click(object sender, EventArgs e)
+        {
+            var circleForm = new ColorCIrcleSettings();
+            circleForm.ShowDialog();
         }
     }
 }

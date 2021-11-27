@@ -42,6 +42,7 @@
             this.GenerationBar = new System.Windows.Forms.TrackBar();
             this.GenerationBarLabel = new System.Windows.Forms.Label();
             this.InfoLabel = new System.Windows.Forms.Label();
+            this.CircleSettingsBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.SpeedBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbMain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ParticlesCounter)).BeginInit();
@@ -87,7 +88,7 @@
             // 
             this.PbMain.Location = new System.Drawing.Point(12, 59);
             this.PbMain.Name = "PbMain";
-            this.PbMain.Size = new System.Drawing.Size(776, 374);
+            this.PbMain.Size = new System.Drawing.Size(809, 374);
             this.PbMain.TabIndex = 4;
             this.PbMain.TabStop = false;
             this.PbMain.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseClick);
@@ -158,14 +159,14 @@
             this.GenerationBar.Location = new System.Drawing.Point(476, 8);
             this.GenerationBar.Maximum = 0;
             this.GenerationBar.Name = "GenerationBar";
-            this.GenerationBar.Size = new System.Drawing.Size(312, 45);
+            this.GenerationBar.Size = new System.Drawing.Size(253, 45);
             this.GenerationBar.TabIndex = 11;
             this.GenerationBar.Scroll += new System.EventHandler(this.GenerationBar_Scroll);
             // 
             // GenerationBarLabel
             // 
             this.GenerationBarLabel.AutoSize = true;
-            this.GenerationBarLabel.Location = new System.Drawing.Point(602, 40);
+            this.GenerationBarLabel.Location = new System.Drawing.Point(568, 40);
             this.GenerationBarLabel.Name = "GenerationBarLabel";
             this.GenerationBarLabel.Size = new System.Drawing.Size(59, 13);
             this.GenerationBarLabel.TabIndex = 12;
@@ -183,11 +184,22 @@
             this.InfoLabel.TabIndex = 8;
             this.InfoLabel.Visible = false;
             // 
+            // CircleSettingsBtn
+            // 
+            this.CircleSettingsBtn.Location = new System.Drawing.Point(735, 12);
+            this.CircleSettingsBtn.Name = "CircleSettingsBtn";
+            this.CircleSettingsBtn.Size = new System.Drawing.Size(86, 41);
+            this.CircleSettingsBtn.TabIndex = 13;
+            this.CircleSettingsBtn.Text = "Color Circle Settings";
+            this.CircleSettingsBtn.UseVisualStyleBackColor = true;
+            this.CircleSettingsBtn.Click += new System.EventHandler(this.CircleSettingsBtn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 442);
+            this.ClientSize = new System.Drawing.Size(833, 442);
+            this.Controls.Add(this.CircleSettingsBtn);
             this.Controls.Add(this.GenerationBarLabel);
             this.Controls.Add(this.GenerationBar);
             this.Controls.Add(this.ParticlesCountLabel);
@@ -227,6 +239,7 @@
         private System.Windows.Forms.TrackBar GenerationBar;
         private System.Windows.Forms.Label GenerationBarLabel;
         private System.Windows.Forms.Label InfoLabel;
+        private System.Windows.Forms.Button CircleSettingsBtn;
     }
 }
 

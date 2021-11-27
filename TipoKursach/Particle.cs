@@ -44,6 +44,7 @@ namespace TipoKursach
             _speed = particle.GetSpeed();
             _radius = particle.GetRadius();
             _life = particle.GetLife();
+            _color = particle.GetColor();
             _isLockedInfo = particle.IsLocedInfo();
         }
 
@@ -71,6 +72,11 @@ namespace TipoKursach
         public void SetColor(Color color)
         {
             _color = color;
+        }
+
+        public Color GetColor()
+        {
+            return _color;
         }
 
         public bool IsLeftScreen(PictureBox pictureBox)
