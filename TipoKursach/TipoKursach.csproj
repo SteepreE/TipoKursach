@@ -46,30 +46,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ColorCircle.cs" />
-    <Compile Include="ColorCIrcleSettings.cs">
+    <Compile Include="ColorCircle\ColorCircle.cs" />
+    <Compile Include="ColorCircle\ColorCIrcleSettings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ColorCIrcleSettings.Designer.cs">
+    <Compile Include="ColorCircle\ColorCIrcleSettings.Designer.cs">
       <DependentUpon>ColorCIrcleSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="MainWindow\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="MainWindow\MainWindow.Designer.cs">
+      <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Particle.cs" />
-    <Compile Include="ParticlesDirection.cs" />
-    <Compile Include="ParticlesFactory.cs" />
-    <Compile Include="ParticleSystem.cs" />
+    <Compile Include="Particles\Particle.cs" />
+    <Compile Include="Particles\ParticlesDirection.cs" />
+    <Compile Include="Particles\ParticlesFactory.cs" />
+    <Compile Include="Particles\ParticleSystem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="ColorCIrcleSettings.resx">
+    <EmbeddedResource Include="ColorCircle\ColorCIrcleSettings.resx">
       <DependentUpon>ColorCIrcleSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="MainWindow\MainWindow.resx">
+      <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -46,7 +46,7 @@ namespace TipoKursach
 
             foreach (var particle in _particles.ToArray())
             {
-                if (Form1.IsLeftScreen(particle))
+                if (MainWindow.IsLeftScreen(particle))
                 {
                     particle.Destroy();
                 }
@@ -98,7 +98,7 @@ namespace TipoKursach
             {
                 if (_particles.Count < _particlesLimit)
                 {
-                    _particles.Add(GetParticle());
+                    _particles.Add(GetNewParticle());
                 }
                 else if (_particles.Count > _particlesLimit)
                 {
@@ -107,14 +107,14 @@ namespace TipoKursach
             }
         }
 
-        public Particle GetParticle()
+        public Particle GetNewParticle()
         {
             var particle = _factory.Create();
 
             particle.OnDestroy += (prt) =>
             {
                 _particles.Remove(prt);
-                _particles.Add(GetParticle());
+                _particles.Add(GetNewParticle());
             };
 
             return particle;
