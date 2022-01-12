@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace TipoKursach
 {
@@ -79,13 +74,6 @@ namespace TipoKursach
             return _color;
         }
 
-        public bool IsLeftScreen(PictureBox pictureBox)
-        {
-            return (_x + _radius < 0 
-                || _x > pictureBox.Image.Width 
-                || _y > pictureBox.Image.Height);
-        }
-
         public bool IsLocedInfo()
         {
             return _isLockedInfo;
@@ -151,6 +139,7 @@ namespace TipoKursach
         public void Draw(Graphics g)
         {
             if (_isLockedInfo) ShowInfo(g);
+
 
             float k = Math.Min(1f, _life / 100);
             int alpha = (int)(k * 255);

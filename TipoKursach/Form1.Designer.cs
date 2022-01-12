@@ -51,7 +51,8 @@
             // 
             // timer1
             // 
-            this.timer1.Interval = 40;
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 20;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // StartStopButton
@@ -140,10 +141,11 @@
             this.ParticlesCounter.Size = new System.Drawing.Size(120, 20);
             this.ParticlesCounter.TabIndex = 9;
             this.ParticlesCounter.Value = new decimal(new int[] {
-            150,
+            500,
             0,
             0,
             0});
+            this.ParticlesCounter.ValueChanged += new System.EventHandler(this.ParticlesCounter_ValueChanged);
             // 
             // ParticlesCountLabel
             // 
@@ -162,6 +164,7 @@
             this.GenerationBar.Size = new System.Drawing.Size(253, 45);
             this.GenerationBar.TabIndex = 11;
             this.GenerationBar.Scroll += new System.EventHandler(this.GenerationBar_Scroll);
+            this.GenerationBar.ValueChanged += new System.EventHandler(this.GenerationBar_ValueChanged);
             // 
             // GenerationBarLabel
             // 

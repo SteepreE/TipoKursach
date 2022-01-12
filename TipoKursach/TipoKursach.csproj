@@ -60,6 +60,9 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Particle.cs" />
+    <Compile Include="ParticlesDirection.cs" />
+    <Compile Include="ParticlesFactory.cs" />
+    <Compile Include="ParticleSystem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ColorCIrcleSettings.resx">

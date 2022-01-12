@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TipoKursach
 {
     public partial class ColorCIrcleSettings : Form
     {
+        private ColorCircle _colorCircle;
+
         public ColorCIrcleSettings()
         {
             InitializeComponent();
@@ -20,17 +16,30 @@ namespace TipoKursach
         private void SetColorButton_Click(object sender, EventArgs e)
         {
             colorDialog1.ShowDialog();
-            ColorBox.Image = new Bitmap(ColorBox.Width, ColorBox.Height);
-
-            var g = Graphics.FromImage(ColorBox.Image);
-
-            g.Clear(colorDialog1.Color);
-            Form1._colorCircle.SetColor(colorDialog1.Color);
+            SetColorBox();
+            _colorCircle.SetColor(colorDialog1.Color);
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            Form1._colorCircle.SetRadius(RadiusSelector.Value);
+            _colorCircle.SetRadius(RadiusSelector.Value);
+        }
+
+        public void SetColorCircle(ColorCircle colorCircle)
+        {
+            _colorCircle = colorCircle;
+
+            RadiusSelector.Value = _colorCircle.GetRadius();
+            colorDialog1.Color = _colorCircle.GetColor();
+            SetColorBox();
+        }
+
+        private void SetColorBox()
+        {
+            ColorBox.Image = new Bitmap(ColorBox.Width, ColorBox.Height);
+            var g = Graphics.FromImage(ColorBox.Image);
+
+            g.Clear(colorDialog1.Color);
         }
     }
 }
